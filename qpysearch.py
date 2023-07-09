@@ -6,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 subject_name = ""
+driver = None
 
 root = tk.Tk()
 root.geometry("850x400")
@@ -13,8 +14,10 @@ root.title("QPSearch")
 
 
 def on_submit():
-    global subject_name
+    global subject_name, driver
     subject_name = subject_entry.get()
+    driver = webdriver.Chrome()
+    driver.get("https://libportal.manipal.edu/MIT/Question%20Paper.aspx")
     thread = threading.Thread(target=traverse)
     thread.start()
     print(subject_name)
@@ -53,9 +56,7 @@ def traverse():
                 driver.back()
 
 
-driver = webdriver.Chrome()
 
-driver.get("https://libportal.manipal.edu/MIT/Question%20Paper.aspx")
 
 time.sleep(1)
 
